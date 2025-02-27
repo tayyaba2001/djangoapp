@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}{% if form.instance.id %}Edit{% else %}Add{% endif %} Product{% endblock %}
+
+{% block content %}
+    <h1>{% if form.instance.id %}Edit{% else %}Add{% endif %} Product</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+   <!---     {{ form.as_p }} -->
+        
+    <div class="d-flex flex-column gap-3">
+        {% for field in form %}
+        <div class="d-flex flex-row">
+            <label class="fw-bold  mr-5 col-2">{{ field.label }}</label>
+            <div class="col-9">{{ field }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+    <a href="{% url 'product_list' %}" class="btn btn-secondary mt-2">Back to Product List</a>
+{% endblock %}
